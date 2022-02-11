@@ -1,10 +1,71 @@
 import React, {useState, useEffect} from 'react';
 import '../css/rankingChart.css';
-import { Chart as ChartJS } from 'chart.js/auto';
-import { Chart } from 'react-chartjs-2';
 import axios from 'axios';
+import Chart from 'react-apexcharts'
 
 const RankingChart = () => {
+  const options = {
+    fill: {
+    },
+    labels: {
+      style:{
+        fontFamily:'Cafe24SsurroundAir'
+      }
+    }
+    ,
+    legend: {
+      show:false
+    },
+    chart: {
+      id: '라떼는 순위',
+      toolbar: {
+        show:false
+      },
+      background:'#ffffff',
+    },
+    xaxis: {
+      max:10,
+      categories: [],
+      labels:{
+        style: {
+          fontFamily:'Cafe24SsurroundAir'
+        }
+      }  
+    },
+    yaxis: {
+      categories: [],
+      labels:{
+        show:false,
+        style: {
+          fontFamily:'Cafe24SsurroundAir'
+        }
+      }  
+    },
+    plotOptions: {
+      bar: {
+        distributed: true,
+        borderRadius: 10,
+      }
+    },
+    tooltip: {
+      shared:false,
+      style: {
+        fontFamily:'Cafe24SsurroundAir'
+      },
+      y: {
+        show:false
+      }
+    }
+  }
+
+  const series = [{
+    name: '퀘스트 수',
+    data: [],
+    style:{
+      fontFamily:'Cafe24SsurroundAir'
+    }
+  }]
+
   const [ranking, setRanking] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -32,34 +93,20 @@ const RankingChart = () => {
   if (error) return <div>에러가 발생했습니다</div>;
   if (!ranking) return null;
 
-  console.log(ranking)
-
   const school_title = ranking.map((ranking) => (ranking.title))
   const school_count = ranking.map((ranking) => (ranking.quest_count))
 
-  const data = {
-    labels:[],
-    datasets: [
-      {
-      type:'bar',
-      borderColor:'black',
-      borderWidth:1,
-      data:[],
-      }]
+  options['xaxis']['categories'] = school_title
+  series[0]['data'] = school_count
+
+  console.log(school_title)
+  console.log(school_count)
+
+    return (
+      <div className='flex justify-center pt-6'>
+        <Chart options={options} series={series} width={630} height={'auto'} type="bar"/>
+      </div>
+    )
   }
-
-  const options = {
-    responsive: false,
-  };
-
-  data.labels=school_title
-  data.datasets[0].data = school_count
-
-  return (
-    <div>
-      <Chart options={options} className='w-2/3' type="bar" data={data}/>
-    </div>
-  )
-}
 
 export default RankingChart;

@@ -37,6 +37,9 @@ function QuestInput() {
 
   const onSubmit = (data) => {
     console.log(data)
+    axios.post('https://site1.public.nqo.me/quests/', {
+      todo_quest:"이게최신이다"
+    })
   }
 
   const [schools, setSchools] = useState(null);
@@ -70,13 +73,13 @@ function QuestInput() {
   <>
     <div>
       <form className='flex flex-row justify-evenly' onSubmit={handleSubmit(onSubmit)}>
-        <select className='text-center font-bold rounded-lg' onChange={handleSelect} value={Selected}>
+        <select className='w-2/12 text-center font-bold rounded-lg' onChange={handleSelect} value={Selected}>
           <option>+</option>
           {schools && schools.map(schools => (
             <Schools schools={schools}/>
           ))}
         </select>
-        <input className="bg-white appearance-none border-2 border-white rounded w-10/12 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#91A7FF]" type="text"  placeholder="후배님들을 위해 추천해주고 싶은 퀘스트를 작성해주세요! ex) 버들골에서 막걸리 마시기" {...register("todo_quest")}/>
+        <input className="bg-white appearance-none border-2 border-white rounded w-9/12 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#91A7FF]" type="text"  placeholder="후배님들을 위해 추천해주고 싶은 퀘스트를 작성해주세요! ex) 버들골에서 막걸리 마시기" {...register("todo_quest")}/>
         <input className="cursor-pointer text-white font-bold bg-[#BAC8FF] p-2 rounded-lg hover:bg-[#91A7FF]" type="submit" value="작성"/>
       </form>
     </div>

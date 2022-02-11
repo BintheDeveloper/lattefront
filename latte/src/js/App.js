@@ -4,9 +4,9 @@ import Templates from './Templates'
 
 function App() {
   return (
-    <>
+    <div className='bg-blob bg-cover'>
       <Templates/>
-    </>
+    </div>
   );
 }
 

@@ -6,24 +6,24 @@ import QuestLike from './questLike';
 function Quest({test}) {
 return (
   <li className='py-2'>
-  <div className='flex flex-row justify-between'>
-    <div className='flex w-2/7 items-center justify-between'>
-      <span className='bg-[#77B756] text-white font-bold p-1.5 rounded-xl'>{test.school_name}</span>
-      &nbsp;&nbsp;&nbsp;
-      <span className='text-[#666666]'>{test.todo_quest}</span>
+    <div className='flex flex-row justify-between'>
+      <div className='flex w-2/7 items-center justify-between'>
+        <span className='bg-[#77B756] text-white font-bold p-1.5 rounded-xl'>{test.school_name}</span>
+        &nbsp;&nbsp;&nbsp;
+        <span className='text-[#666666]'>{test.todo_quest}</span>
+      </div>
+      <div>   
+        <QuestLike id={test.id}/> {test.like_count} 
+      </div>
     </div>
-    <div>   
-      <QuestLike id={test.id}/> {test.like_count} 
-    </div>
-  </div>
-</li>
+  </li>
   )
 }
 
 function Hottest({test}) {
   return (
     <li className='py-2'>
-      <div className='flex flex-row justify-between'>
+      <div className='flex flex-row justify-between items-center'>
         <div className='flex w-2/7 items-center justify-between'>
           <span className='bg-[#77B756] text-white font-bold p-1.5 rounded-xl'>{test.school_name}</span>
           &nbsp;&nbsp;&nbsp;

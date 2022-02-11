@@ -4,9 +4,14 @@ module.exports = {
   ],
   theme: {
     extend: {},
-    // colors: {
-    //   'yeji':'#EDF2FF',
-    // }
+    backgroundImage: {
+      'blob': "url('/src/asset/blob.svg')",
+    },
+    textShadow: {
+      default: '0 2px 0 #ffffff'
+    }
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-textShadow')
+  ],
 }
