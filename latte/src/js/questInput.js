@@ -72,18 +72,18 @@ function QuestInput() {
   return (
   <>
     <div>
-      <form className='flex flex-row justify-evenly' onSubmit={handleSubmit(onSubmit)}>
-        <select className='w-2/12 text-center font-bold rounded-lg' onChange={handleSelect} value={Selected}>
+      <form className='flex flex-row justify-between' onSubmit={handleSubmit(onSubmit)}>
+        <select className='basis-2/12 text-center font-bold rounded-lg' onChange={handleSelect} value={Selected}>
           <option>+</option>
           {schools && schools.map(schools => (
             <Schools schools={schools}/>
           ))}
         </select>
-        <input className="bg-white appearance-none border-2 border-white rounded w-9/12 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#91A7FF]" type="text"  placeholder="후배님들을 위해 추천해주고 싶은 퀘스트를 작성해주세요! ex) 버들골에서 막걸리 마시기" {...register("todo_quest")}/>
-        <input className="cursor-pointer text-white font-bold bg-[#BAC8FF] p-2 rounded-lg hover:bg-[#91A7FF]" type="submit" value="작성"/>
+        <input className="basis-9/12 bg-white appearance-none border-2 border-white rounded w-9/12 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#91A7FF]" type="text"  placeholder="후배님들을 위해 추천해주고 싶은 퀘스트를 작성해주세요! ex) 버들골에서 막걸리 마시기" {...register("todo_quest")}/>
+        <input className="basis-0.5/12 cursor-pointer text-white font-bold bg-[#BAC8FF] p-2 rounded-lg hover:bg-[#91A7FF]" type="submit" value="작성"/>
       </form>
     </div>
-    <AddschModal open = {modalOpen} close={closeModal} header="Modal heading">안되나?</AddschModal>
+    <AddschModal open = {modalOpen} close={closeModal}>안되나?</AddschModal>
   </> 
   )
 

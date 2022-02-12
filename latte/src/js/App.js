@@ -1,10 +1,9 @@
 import React from 'react'
 import Templates from './Templates'
 
-
 function App() {
   return (
-    <div className='bg-blob bg-cover'>
+    <div className='bg-clip-border bg-origin-border bg-blob bg-cover bg-no-repeat bg-top'>
       <Templates/>
     </div>
   );

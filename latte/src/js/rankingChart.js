@@ -22,6 +22,12 @@ const RankingChart = () => {
         show:false
       },
       background:'#ffffff',
+      events: {
+        click(event, chartContext, config) {
+          console.log(config.seriesIndex);
+          console.log(config.dataPointIndex); 
+}
+      }
     },
     xaxis: {
       max:10,
@@ -103,7 +109,7 @@ const RankingChart = () => {
   console.log(school_count)
 
     return (
-      <div className='flex justify-center pt-6'>
+      <div className='flex justify-center pt-6 z-auto'>
         <Chart options={options} series={series} width={630} height={'auto'} type="bar"/>
       </div>
     )
