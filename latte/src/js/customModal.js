@@ -10,18 +10,14 @@ function CustomModal(props) {
       {open ? (
         <>
           <section className='justify-center items-center flex overflow-x-hidden z-50 overflow-y-auto fixed inset-0 outline-none focus:outline-none'>
-            <div className='shadow-md rounded-md p-2 bg-white relative w-auto my-6 mx-auto max-w-3xl'>
-              <div className="p-5 shadow-md bg-[#EDF2FF] border-0 rounded-md relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <div className='shadow-md rounded-md p-2 bg-white w-120px relative my-6 mx-auto max-w-3xl'>
+              <div className="p-5 h-80 shadow-md bg-[#EDF2FF] w-full h-full border-0 rounded-md relative flex flex-col w-full outline-none focus:outline-none">
                 <header className='text-3xl text-shadow'>
                   <span onClick={close} className="text-[#91A7FF]">#</span>{header}
-                  <button className="close" onClick={close}>
-                    {' '}
-                    &times;{' '}
-                  </button>
                 </header>
-                <main>{props.children}</main>
-                <footer>
-                </footer>
+                <main>
+                  {props.children}
+                </main>
               </div>
             </div>
           </section>

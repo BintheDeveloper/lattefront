@@ -13,7 +13,7 @@ function Schools({schools}) {
   )}
 }
 
-function QuestInput() {
+function QuestInput(props) {
   const [Selected, setSelected] = useState('');
   const {register, handleSubmit} = useForm();
   const [modalOpen, setModalOpen] = useState(false);
@@ -30,7 +30,9 @@ function QuestInput() {
     console.log(Selected)}
 
   useEffect(() => {
-    if (Selected =='+') {openModal()}
+    if (Selected =='➕') {
+      openModal()
+    }
     else {closeModal()}
   }, [Selected])
   
@@ -38,44 +40,18 @@ function QuestInput() {
   const onSubmit = (data) => {
     console.log(data)
     axios.post('https://site1.public.nqo.me/quests/', {
-      todo_quest:"이게최신이다"
+      todo_quest:data['todo_quest']
     })
   }
-
-  const [schools, setSchools] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchQuests = async () => {
-      try {
-        // 요청이 시작 할 때에는 error 와 users 를 초기화하고
-        setError(null);
-        setSchools(null);
-        // loading 상태를 true 로 바꿉니다.
-        setLoading(true);
-        const response = await axios.get('https://site1.public.nqo.me/schools/');
-        setSchools(response.data); // 데이터는 response.data 안에 들어있습니다.
-      } catch (e) {
-        setError(e);
-      }
-      setLoading(false);
-    };
-
-    fetchQuests();
-  }, []);
-
-  if (loading) return <div>로딩중..</div>;
-  if (error) return <div>에러가 발생했습니다</div>;
-  if (!schools) return null;
 
   return (
   <>
     <div>
       <form className='flex flex-row justify-between' onSubmit={handleSubmit(onSubmit)}>
-        <select className='basis-2/12 text-center font-bold rounded-lg' onChange={handleSelect} value={Selected}>
-          <option>+</option>
-          {schools && schools.map(schools => (
+        <select defaultValue='default' className='basis-2/12 text-center font-bold rounded-lg' onChange={handleSelect} value={Selected}>
+          <option className='hidden' value='default'>학교 선택</option>
+          <option className='bg-slate-300'>➕</option>
+          {props.school && props.school.map(schools => (
             <Schools schools={schools}/>
           ))}
         </select>

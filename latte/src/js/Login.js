@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import '../css/login.css';
-import axios from 'axios';
+// import React, { useState, useEffect, useContext } from 'react';
+// import '../css/login.css';
+// import axios from 'axios';
+// import { UserContext } from './App';
 
-function Login() {
+// export const UserDispatch = React.createContext(null);
 
-  return (
-    <>
-      <div>로그인하기!</div>
-    </> 
-  )
-}
+// function Login() {
+//   const { loggedIn, setLoggedIn } = useContext(UserContext);
+//   console.log(loggedIn)
 
-export default Login;
+//   return (
+//     <>
+//       {loggedIn ? <button onClick={() => setLoggedIn((prev) => !prev)}>회원가입 하기</button> : <button onClick={() => setLoggedIn((prev) => !prev)}>로그아웃 하기</button> }
+      
+//     </> 
+//   )
+// }
+
+// export default Login;

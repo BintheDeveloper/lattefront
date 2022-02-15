@@ -110,7 +110,7 @@ const RankingChart = () => {
 
     return (
       <div className='flex justify-center pt-6 z-auto'>
-        <Chart options={options} series={series} width={630} height={'auto'} type="bar"/>
+        <Chart options={options} series={series} width={600} height={200} type="bar"/>
       </div>
     )
   }

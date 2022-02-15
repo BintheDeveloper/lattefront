@@ -13,27 +13,10 @@ return (
         <span className='text-[#666666]'>{test.todo_quest}</span>
       </div>
       <div className='mr-2'>   
-        <QuestLike id={test.id}/> {test.like_count} 
+        <QuestLike id={test.id} count={test.like_count}/> 
       </div>
     </div>
   </li>
-  )
-}
-
-function Hottest({test}) {
-  return (
-    <li className='py-2'>
-      <div className='flex flex-row justify-between items-center'>
-        <div className='flex w-2/7 items-center justify-between'>
-          <span className='bg-[#77B756] text-white font-bold p-1.5 rounded-xl'>{test.school_name}</span>
-          &nbsp;&nbsp;&nbsp;
-          <span className='text-[#666666]'>{test.todo_quest}</span>
-        </div>
-        <div className='mr-2'>   
-          <QuestLike id={test.id}/> {test.like_count} 
-        </div>
-      </div>
-    </li>
   )
 }
 
@@ -42,6 +25,7 @@ function QuestList(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [hottest, setHottest] = useState(null);
+  const [newQuest, setNewQuest] = useState(null);
 
   useEffect(() => {
     const fetchQuests = async () => {
@@ -93,7 +77,7 @@ function QuestList(props) {
         </ul>) : (
         <ul>
         {arr2 && arr2.map((quest) => (
-          <Hottest key={quest.id} test={quest}/>
+          <Quest key={quest.id} test={quest}/>
         ))}
         </ul>
       ) }

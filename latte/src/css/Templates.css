@@ -35,3 +35,6 @@ label, header {
   font-family: 'KOTRAHOPE';
 }
 
+svg {
+  border-radius:10px!important;
+}

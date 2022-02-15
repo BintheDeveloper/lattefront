@@ -5,8 +5,8 @@ import axios from 'axios';
 function School({test}) {
   return (
       <option>{test.title}</option>
-    )
-  }
+  )
+}
   
 
 function QuestSort() {
