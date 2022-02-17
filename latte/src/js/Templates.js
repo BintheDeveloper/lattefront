@@ -21,7 +21,8 @@ function Templates() {
   const [school, setSchool] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [input, setInput] = useState(null)
+  const [user, setUser] = useState(null);
+  const [input, setInput] = useState([]);
   
   useEffect(() => {
     const fetchQuests = async () => {
@@ -58,15 +59,17 @@ function Templates() {
     setSorting(false);
   }
 
+  console.log(user)
+
   return (
     <>
-      {/* <nav>
-        <Login/>
-      </nav> */}
+      <nav>
+        <Login user={user} setUser={setUser}/>
+      </nav>
       <div className='text-xs flex flex-col container mx-auto w-3/5 h-1/3 px-10 pt-0 pb-10 m-10 rounded-lg;'>
         <div className='flex justify-between items-center py-4'>
           <label className='text-3xl text-shadow'><span className="text-[#91A7FF]">#</span> 후배들아, 학교를 부탁해!</label>
-          <div className='flex flex-col justify-between mr-24'>
+          <div className='flex flex-col justify-between mr-24'> 
             <ServiceModal/>
             <ContactModal/>
           </div>
@@ -113,10 +116,10 @@ function Templates() {
                     </div>
                 </div>
                 <div className='bg-[#EDF2FF] p-2 rounded-lg'>
-                  <QuestInput school={school}/>
+                  <QuestInput school={school} input={input} setInput={setInput}/>
                 </div>
                 <div className='scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scroll-smooth overflow-y-scroll scrollbar-thumb-custom-coral scrollbar-track-gray-100 p-2 h-80'>
-                  <QuestList school={Selected} getlink={sort} html={sorting}/>
+                  <QuestList school={Selected} getlink={sort} html={sorting} input={input}/>
                 </div>
               </div>
             </div>

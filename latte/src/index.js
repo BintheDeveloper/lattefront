@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import App from './js/App';
 import reportWebVitals from './js/reportWebVitals';
 import './css/index.css'
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://site1.public.nqo.me';
+axios.defaults.withCredentials = true;
 
 ReactDOM.render(
   <React.StrictMode>

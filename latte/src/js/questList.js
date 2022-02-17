@@ -25,7 +25,6 @@ function QuestList(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [hottest, setHottest] = useState(null);
-  const [newQuest, setNewQuest] = useState(null);
 
   useEffect(() => {
     const fetchQuests = async () => {
@@ -63,24 +62,39 @@ function QuestList(props) {
   }
   else {
   var arr1 = quests["Quests"].filter(quest => quest['school_name'] ===`${props.school}` )
-  console.log(arr1)
-
   var arr2 = hottest["HottestQuests"].filter(hot => hot['school_name'] ===`${props.school}` )
-  console.log(arr2)}
+  }
+
+  console.log(arr1)
 
   return (
     <>
-      { props.html ? (
+      { 
+      props.input[0] ?
+        <ul>
+          {props.input.slice(0).reverse() && props.input.slice(0).reverse().map((quest) => (
+            <Quest key={quest.id} test={quest}/>
+          ))}
+        </ul>
+      :
+      null
+      }
+      { props.html ? 
+      (
         <ul>
         {arr1 && arr1.map((quest) => (
           <Quest key={quest.id} test={quest}/>))}
-        </ul>) : (
+        </ul>
+        ) 
+        : 
+        (
         <ul>
         {arr2 && arr2.map((quest) => (
           <Quest key={quest.id} test={quest}/>
         ))}
         </ul>
-      ) }
+      ) 
+      }
     </> 
   )
 }

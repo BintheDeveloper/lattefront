@@ -5,8 +5,6 @@ import Chart from 'react-apexcharts'
 
 const RankingChart = () => {
   const options = {
-    fill: {
-    },
     labels: {
       style:{
         fontFamily:'Cafe24SsurroundAir'
@@ -17,6 +15,7 @@ const RankingChart = () => {
       show:false
     },
     chart: {
+      width:"100%",
       id: '라떼는 순위',
       toolbar: {
         show:false
@@ -26,7 +25,7 @@ const RankingChart = () => {
         click(event, chartContext, config) {
           console.log(config.seriesIndex);
           console.log(config.dataPointIndex); 
-}
+        }
       }
     },
     xaxis: {
@@ -48,6 +47,9 @@ const RankingChart = () => {
       }  
     },
     plotOptions: {
+      dataLabels: {
+        position:'top'
+      },
       bar: {
         distributed: true,
         borderRadius: 10,

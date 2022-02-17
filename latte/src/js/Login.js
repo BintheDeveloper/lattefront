@@ -1,20 +1,49 @@
-// import React, { useState, useEffect, useContext } from 'react';
-// import '../css/login.css';
-// import axios from 'axios';
-// import { UserContext } from './App';
+import React, { useState, useEffect } from 'react';
+import '../css/login.css';
+import axios from 'axios';
 
-// export const UserDispatch = React.createContext(null);
+function Login() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  
+  const logout = () => {
+    console.log('되냐?')
+    localStorage.clear();
+  }
 
-// function Login() {
-//   const { loggedIn, setLoggedIn } = useContext(UserContext);
-//   console.log(loggedIn)
+  const signUp = () => {
+    const fetchQuests = async () => {
+      try {
+        // 요청이 시작 할 때에는 error 와 users 를 초기화하고
+        setError(null);
+        // loading 상태를 true 로 바꿉니다.
+        setLoading(true);
+        const response = await axios.post('https://site1.public.nqo.me/accounts/create-random-id/')
+        console.log(response.data)
+        window.localStorage.setItem('Token', response.data['Token']);
+        window.localStorage.setItem('username', response.data['User']['username'])
+        window.localStorage.setItem('password', response.data['User']['password'])
+        window.localStorage.setItem('email',response.data['User']['email'])
+        window.localStorage.setItem('id',response.data['User']['id'])
+      } catch (e) {
+        setError(e);
+      }
+      setLoading(false);
+    };
 
-//   return (
-//     <>
-//       {loggedIn ? <button onClick={() => setLoggedIn((prev) => !prev)}>회원가입 하기</button> : <button onClick={() => setLoggedIn((prev) => !prev)}>로그아웃 하기</button> }
-      
-//     </> 
-//   )
-// }
+    fetchQuests();
+  
+    if (loading) console.log('로딩 중')
+    if (error) console.log('에러 발생')
+  
+  }
 
-// export default Login;
+  const provider = window.localStorage.getItem('Token')
+    return (
+    <>
+    {provider ? <div onClick={logout}>로그아웃</div>:<div onClick={signUp}>회원가입</div>}
+    </>
+  )
+}
+
+export default Login;
