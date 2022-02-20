@@ -3,20 +3,26 @@ import '../css/questList.css';
 import axios from 'axios';
 import QuestLike from './questLike';
 
-function Quest({test}) {
-return (
-  <li className='py-2'>
-    <div className='flex flex-row justify-between items-center'>
-      <div className='flex w-2/7 items-center justify-between'>
-        <span className='bg-[#77B756] text-white font-bold p-1.5 rounded-xl'>{test.school_name}</span>
-        &nbsp;&nbsp;&nbsp;
-        <span className='text-[#666666]'>{test.todo_quest}</span>
+
+
+function Quest({quest}) {
+  const colors = ['#dc2626', '#65a30d', '#059669', '#0891b2', '#2563eb' , '#7c3aed', '#c026d3', '#e11d48']
+
+  return (
+    <li className='py-2'>
+      <div className='flex flex-row justify-between items-center'>
+        <div className='flex w-2/7 items-center justify-between'>
+          <span style={{backgroundColor:colors[quest.school%8]}} className='text-white font-bold p-1.5 rounded-xl'>{quest.school_name}</span>
+          &nbsp;&nbsp;&nbsp;
+          <span className='text-[#666666]'>{quest.todo_quest}</span>
+        </div>
+        <div className='mr-2'>   
+          <div className='flex items-center w-9 justify-between mr-3'>
+            <QuestLike onoff={quest.like_users || []} id={quest.id} count={quest.like_count}/>
+          </div>
+        </div>
       </div>
-      <div className='mr-2'>   
-        <QuestLike id={test.id} count={test.like_count}/> 
-      </div>
-    </div>
-  </li>
+    </li>
   )
 }
 
@@ -39,6 +45,7 @@ function QuestList(props) {
         const response2 = await axios.get('https://site1.public.nqo.me/web-hottest/')
         setQuests(response1.data); // 데이터는 response.data 안에 들어있습니다.
         setHottest(response2.data)
+        console.log(response1.data)
       } catch (e) {
         setError(e);
       }
@@ -52,50 +59,24 @@ function QuestList(props) {
   if (error) return <div>에러가 발생했습니다</div>;
   if (!quests) return null;
 
-  if (props.school==="전체"){
-  var arr1 = quests["Quests"]
-  var arr2 = hottest["HottestQuests"]
-  }
-  else if (props.school===''){
-    var arr1 = quests["Quests"]
-    var arr2 = hottest["HottestQuests"]
+  if (props.school==="전체" || props.school===''){
+  var arr1 = [...props.input.slice(0).reverse(), ...quests["Quests"]]
+  var arr2 = [...hottest["HottestQuests"],...props.input.slice(0).reverse()]
   }
   else {
-  var arr1 = quests["Quests"].filter(quest => quest['school_name'] ===`${props.school}` )
-  var arr2 = hottest["HottestQuests"].filter(hot => hot['school_name'] ===`${props.school}` )
+  var arr1 = [...props.input.slice(0).reverse(), ...quests["Quests"]].filter(quest => quest['school_name'] ===`${props.school}` )
+  var arr2 = [...hottest["HottestQuests"],...props.input.slice(0).reverse()].filter(hot => hot['school_name'] ===`${props.school}` )
   }
 
-  console.log(arr1)
+  let arr = props.html ? arr1 : arr2
 
   return (
     <>
-      { 
-      props.input[0] ?
-        <ul>
-          {props.input.slice(0).reverse() && props.input.slice(0).reverse().map((quest) => (
-            <Quest key={quest.id} test={quest}/>
-          ))}
-        </ul>
-      :
-      null
-      }
-      { props.html ? 
-      (
-        <ul>
-        {arr1 && arr1.map((quest) => (
-          <Quest key={quest.id} test={quest}/>))}
-        </ul>
-        ) 
-        : 
-        (
-        <ul>
-        {arr2 && arr2.map((quest) => (
-          <Quest key={quest.id} test={quest}/>
-        ))}
-        </ul>
-      ) 
-      }
-    </> 
+      <ul>
+        {arr && arr.map((quest) => (
+        <Quest quest={quest}/>))}
+      </ul>
+    </>
   )
 }
 

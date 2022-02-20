@@ -5,6 +5,7 @@ import Chart from 'react-apexcharts'
 
 const RankingChart = () => {
   const options = {
+    colors :['#dc2626','#ea580c','#ca8a04','#65a30d','#059669','#0891b2', '#2563eb', '#7c3aed', '#c026d3', '#e11d48'],
     labels: {
       style:{
         fontFamily:'Cafe24SsurroundAir'
@@ -29,7 +30,7 @@ const RankingChart = () => {
       }
     },
     xaxis: {
-      max:10,
+      range:10,
       categories: [],
       labels:{
         style: {

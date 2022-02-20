@@ -6,7 +6,7 @@ import QuestList from './questList';
 import QuestInput from './questInput';
 import ServiceModal from './serviceModal';
 import ContactModal from './contactModal';
-import Login from './Login';
+import SignUp from './SignUp.js'
 
 function School({test}) {
   return (
@@ -16,8 +16,8 @@ function School({test}) {
 
 function Templates() {
   const [Selected, setSelected] = useState("");
-  const [sort, setSort] = useState('web-hottest')
-  const [sorting, setSorting] = useState(false)
+  const [sort, setSort] = useState('quests')
+  const [sorting, setSorting] = useState(true)
   const [school, setSchool] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -64,7 +64,7 @@ function Templates() {
   return (
     <>
       <nav>
-        <Login user={user} setUser={setUser}/>
+        <SignUp user={user} setUser={setUser}/>
       </nav>
       <div className='text-xs flex flex-col container mx-auto w-3/5 h-1/3 px-10 pt-0 pb-10 m-10 rounded-lg;'>
         <div className='flex justify-between items-center py-4'>
@@ -106,12 +106,17 @@ function Templates() {
                     </select>
                     <div className='flex basis-10/12 y-full justify-evenly'>
                       <div className='basis-1/4'></div>
-                      <>
-                        <button className='text-base border-transparent border-b-4 hover:border-black hover:border-b-4 hover:font-bold' onClick={sortNew}>최신</button>
-                      </>
-                      <>
+                      {sorting ?
+                      (<>
+                        <button className='text-base border-transparent border-b-4 hover:border-black hover:border-b-4 hover:font-bold font-bold border-b-4 border-black' onClick={sortNew}>최신</button>
                         <button className='text-base border-transparent border-b-4 hover:border-black hover:border-b-4 hover:font-bold' onClick={sortHot}>인기</button>
                       </>
+                       ):
+                      (<>
+                       <button className='text-base border-transparent border-b-4 hover:border-black hover:border-b-4 hover:font-bold' onClick={sortNew}>최신</button>
+                       <button className='text-base border-transparent border-b-4 hover:border-black hover:border-b-4 hover:font-bold font-bold border-b-4 border-black' onClick={sortHot}>인기</button>
+                      </>)
+                      }
                       <div className='basis-1/4'></div>
                     </div>
                 </div>

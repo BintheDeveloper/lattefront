@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import '../css/login.css';
 import axios from 'axios';
+import EditUserModal from './editUserModal';
+import LoginModal from './LoginModal';
 
-function Login() {
+function SignUp() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   
   const logout = () => {
-    console.log('되냐?')
     localStorage.clear();
+    window.location.href = '/';
   }
 
   const signUp = () => {
@@ -41,9 +43,20 @@ function Login() {
   const provider = window.localStorage.getItem('Token')
     return (
     <>
-    {provider ? <div onClick={logout}>로그아웃</div>:<div onClick={signUp}>회원가입</div>}
+    {provider ?
+    (<>
+      <div onClick={logout}>로그아웃</div>
+      <EditUserModal/>
+     </>
+    )
+     :
+     <>
+     <div onClick={signUp}>회원가입</div>
+     <LoginModal/>
+     </>
+     }
     </>
   )
 }
 
-export default Login;
+export default SignUp;
